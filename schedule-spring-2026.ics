@@ -1,0 +1,127 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Living Age//Schedule//EN
+CALSCALE:GREGORIAN
+
+BEGIN:VEVENT
+SUMMARY:BME 129C - Capstone Lab
+DTSTART;TZID=America/Los_Angeles:20260330T092000
+DTEND;TZID=America/Los_Angeles:20260330T102500
+RRULE:FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20260605T235959
+LOCATION:UCSC
+DESCRIPTION:Design/Implement BME (capstone lab) - Instructor R. Dubois
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:BME 80G - Bioethics
+DTSTART;TZID=America/Los_Angeles:20260330T132000
+DTEND;TZID=America/Los_Angeles:20260330T142500
+RRULE:FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20260605T235959
+LOCATION:UCSC
+DESCRIPTION:Bioethics in the 21st Century - Instructor K. Miga
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:BME 80G - Discussion Section
+DTSTART;TZID=America/Los_Angeles:20260403T104000
+DTEND;TZID=America/Los_Angeles:20260403T114500
+RRULE:FREQ=WEEKLY;BYDAY=FR;UNTIL=20260605T235959
+LOCATION:UCSC
+DESCRIPTION:Bioethics discussion section
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:BME 234 - Computational Genomics/ML
+DTSTART;TZID=America/Los_Angeles:20260331T172000
+DTEND;TZID=America/Los_Angeles:20260331T185500
+RRULE:FREQ=WEEKLY;BYDAY=TU,TH;UNTIL=20260605T235959
+LOCATION:R Carson Acad 252
+DESCRIPTION:AM-234/BME-234-01 - Computational Genomics & ML. Instructor Ioannidis
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:Entrepreneurship Book Club (Bernick)
+DTSTART;TZID=America/Los_Angeles:20260330T143000
+DTEND;TZID=America/Los_Angeles:20260330T160000
+RRULE:FREQ=WEEKLY;BYDAY=MO;UNTIL=20260605T235959
+LOCATION:UCSC
+DESCRIPTION:Weekly entrepreneurship book club with David Bernick
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:SynBioBeta 2026
+DTSTART;VALUE=DATE:20260504
+DTEND;VALUE=DATE:20260508
+LOCATION:San Jose Convention Center, San Jose CA
+DESCRIPTION:The Global Synthetic Biology Conference - AI and Biology
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:UCSC Spring Quarter Ends - Finals
+DTSTART;VALUE=DATE:20260608
+DTEND;VALUE=DATE:20260612
+LOCATION:UCSC
+DESCRIPTION:Final exams June 8-11. Instruction ends June 5. BME 234 final project due June 11.
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:Live Oak Music Festival
+DTSTART;VALUE=DATE:20260619
+DTEND;VALUE=DATE:20260622
+LOCATION:El Chorro Regional Park, San Luis Obispo CA
+DESCRIPTION:Three days of music, camping, and community. Home turf.
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:PorcFest 2026
+DTSTART;VALUE=DATE:20260621
+DTEND;VALUE=DATE:20260629
+LOCATION:Across New Hampshire
+DESCRIPTION:Porcupine Freedom Festival - Passport to the Free State. Full week across NH.
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:FreedomFest 2026
+DTSTART;VALUE=DATE:20260708
+DTEND;VALUE=DATE:20260712
+LOCATION:Caesars Forum Conference Center, Las Vegas NV
+DESCRIPTION:World's largest gathering of free minds. Theme: Think Independent.
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:FEE Summer Campus - Spirit of Liberty
+DTSTART;VALUE=DATE:20260720
+DTEND;VALUE=DATE:20260725
+LOCATION:University of Maryland, College Park
+DESCRIPTION:FEE Summer Campus - The Spirit of Liberty: Renewing the American Ideal. Economics track: Austrian school, Adam Smith, Hazlitt.
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:FEE Application Deadline
+DTSTART;VALUE=DATE:20260520
+DESCRIPTION:Apply at FEE.org for Summer Campus July 20-24. Scholarship covers lodging, meals, travel up to $500.
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:Cato University 2026 - Session I
+DTSTART;VALUE=DATE:20260805
+DTEND;VALUE=DATE:20260809
+LOCATION:TBD - check cato.org
+DESCRIPTION:Cato University Summer Term I. Third time attending.
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:Cato University 2026 - Session II
+DTSTART;VALUE=DATE:20260819
+DTEND;VALUE=DATE:20260823
+LOCATION:TBD - check cato.org
+DESCRIPTION:Cato University Summer Term II (alternate session)
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:PhD Application Opens - UCSC BMEB
+DTSTART;VALUE=DATE:20261001
+DESCRIPTION:UCSC graduate applications open October 1 for Fall 2027. Apply through PBSE umbrella, BMEB track.
+END:VEVENT
+
+END:VCALENDAR
