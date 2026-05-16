@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gumby — The True Encyclopedia</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+    background: #f6f6f6;
+    color: #202122;
+    line-height: 1.6;
+  }
+
+  .page-container {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #a7d7f9;
+    padding: 0;
+  }
+
+  /* Header bar */
+  .site-header {
+    background: #2e7d32;
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .site-header h1 {
+    font-size: 1.3em;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+  }
+
+  .site-header .tagline {
+    font-size: 0.8em;
+    opacity: 0.85;
+    font-style: italic;
+  }
+
+  /* Notice banner */
+  .notice {
+    background: #e8f5e9;
+    border: 1px solid #81c784;
+    border-radius: 3px;
+    padding: 12px 18px;
+    margin: 20px 24px 0;
+    font-size: 0.88em;
+    color: #1b5e20;
+  }
+
+  .notice strong { color: #2e7d32; }
+
+  /* Content area */
+  .content {
+    padding: 20px 24px 40px;
+  }
+
+  /* Article title */
+  .article-title {
+    font-size: 1.9em;
+    font-weight: normal;
+    border-bottom: 1px solid #a2a9b1;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+  }
+
+  .article-subtitle {
+    font-size: 0.92em;
+    color: #555;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  /* Infobox */
+  .infobox {
+    float: right;
+    width: 300px;
+    margin: 0 0 16px 20px;
+    border: 1px solid #a2a9b1;
+    background: #f8f9fa;
+    font-size: 0.88em;
+    border-collapse: collapse;
+  }
+
+  .infobox-header {
+    background: #2e7d32;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 1.15em;
+    font-weight: bold;
+  }
+
+  .infobox-image {
+    text-align: center;
+    padding: 12px;
+    background: #fff;
+  }
+
+  .infobox-image .placeholder {
+    width: 180px;
+    height: 240px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 50%, #1b5e20 100%);
+    border-radius: 60% 60% 20% 20% / 50% 50% 30% 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.7em;
+    font-style: italic;
+  }
+
+  .infobox-caption {
+    text-align: center;
+    padding: 4px 10px 10px;
+    font-size: 0.92em;
+    color: #555;
+    font-style: italic;
+  }
+
+  .infobox table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .infobox td {
+    padding: 6px 10px;
+    border-top: 1px solid #ddd;
+    vertical-align: top;
+  }
+
+  .infobox td:first-child {
+    font-weight: bold;
+    width: 110px;
+    color: #333;
+  }
+
+  .infobox-section {
+    background: #e8f5e9;
+    text-align: center;
+    padding: 6px;
+    font-weight: bold;
+    color: #2e7d32;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Headings */
+  h2 {
+    font-size: 1.45em;
+    font-weight: normal;
+    border-bottom: 1px solid #a2a9b1;
+    margin: 28px 0 12px;
+    padding-bottom: 4px;
+  }
+
+  h3 {
+    font-size: 1.15em;
+    font-weight: bold;
+    margin: 20px 0 8px;
+  }
+
+  /* Paragraphs */
+  p {
+    margin-bottom: 12px;
+    text-align: justify;
+  }
+
+  /* Blockquote */
+  blockquote {
+    border-left: 3px solid #2e7d32;
+    margin: 16px 0 16px 20px;
+    padding: 8px 16px;
+    background: #f8f9fa;
+    font-style: italic;
+    color: #333;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 6px;
+    font-style: normal;
+    font-size: 0.9em;
+    color: #666;
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 8px 0 12px 28px;
+  }
+
+  li { margin-bottom: 4px; }
+
+  /* Table of contents */
+  .toc {
+    border: 1px solid #a2a9b1;
+    background: #f8f9fa;
+    padding: 14px 18px;
+    margin: 16px 0;
+    display: inline-block;
+    min-width: 260px;
+    max-width: 400px;
+  }
+
+  .toc-title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .toc ol {
+    margin: 0 0 0 20px;
+    font-size: 0.92em;
+  }
+
+  .toc li { margin-bottom: 3px; }
+
+  .toc a {
+    color: #0645ad;
+    text-decoration: none;
+  }
+
+  .toc a:hover { text-decoration: underline; }
+
+  /* Links */
+  a { color: #0645ad; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Emphasis */
+  .sanskrit {
+    font-style: italic;
+    color: #2e7d32;
+    font-weight: bold;
+  }
+
+  /* Clear floats */
+  .clear { clear: both; }
+
+  /* Footer */
+  .page-footer {
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    padding: 16px 24px;
+    font-size: 0.82em;
+    color: #72777d;
+    text-align: center;
+  }
+
+  /* Corrections sidebar */
+  .correction {
+    background: #fff3e0;
+    border: 1px solid #ffb74d;
+    border-radius: 3px;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 0.88em;
+  }
+
+  .correction strong {
+    color: #e65100;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .infobox {
+      float: none;
+      width: 100%;
+      margin: 0 0 16px 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-container">
+
+  <!-- Header -->
+  <div class="site-header">
+    <div>
+      <h1>The Living Encyclopedia</h1>
+      <div class="tagline">The record as it should be written — by the family, not the franchise.</div>
+    </div>
+  </div>
+
+  <!-- Notice -->
+  <div class="notice">
+    <strong>About this article:</strong> The existing Wikipedia article for Gumby describes the character as "a blocky green humanoid" — the exact opposite of what Gumby is. It omits the spiritual philosophy behind the work, the meaning of the studio name, the family history, and the circumstances of the creator's lineage. This article corrects the record. Sources are the Clokey family history, which remains the intellectual property of the family and of Premavision/Clokey Productions.
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <h1 class="article-title">Gumby</h1>
+    <div class="article-subtitle">A living philosophy encoded in clay — created by Art Clokey, rooted in four generations of the Clokey-Farrington lineage</div>
+
+    <!-- Infobox -->
+    <div class="infobox">
+      <div class="infobox-header">Gumby</div>
+      <div class="infobox-image">
+        <div class="placeholder">[ Clay figure shaped<br>like a seedling<br>reaching toward light ]</div>
+      </div>
+      <div class="infobox-caption">Gumby — a green clay figure whose shape echoes a plant reaching toward the sun. Soft, pliable, transformable. The anti-block.</div>
+
+      <table>
+        <tr><td colspan="2" class="infobox-section">Creation</td></tr>
+        <tr><td>Creator</td><td>Art Clokey (1921–2010)</td></tr>
+        <tr><td>Origin</td><td><em>Gumbasia</em> (1953), USC thesis film under Slavko Vorkapich</td></tr>
+        <tr><td>Studio</td><td><strong>Clokey Productions</strong> and <span class="sanskrit">Premavision</span> — "The Vision of Universal Love" (both names kept)</td></tr>
+        <tr><td>Material</td><td>Clay — hand-shaped, stop-motion, one frame at a time</td></tr>
+        <tr><td>Color</td><td>Green — chosen by Clokey as racially neutral and as a symbol of life</td></tr>
+        <tr><td>Shape</td><td>Modeled after a seedling; slanted head based on his father Charles Farrington's hairstyle</td></tr>
+
+        <tr><td colspan="2" class="infobox-section">Lineage</td></tr>
+        <tr><td>Great-grandfather</td><td>Charles Farrington — Christian Scientist</td></tr>
+        <tr><td>Grandfather</td><td>Art Clokey — creator, held full control for 60 years</td></tr>
+        <tr><td>Father</td><td>Joe Clokey (1961–2018) — president of Premavision, died at 56 fighting to keep Gumby independent</td></tr>
+        <tr><td>Current generation</td><td>Sage Clokey — founder of the Living Age</td></tr>
+
+        <tr><td colspan="2" class="infobox-section">Ownership</td></tr>
+        <tr><td>Gumby character IP</td><td>Fox Entertainment (acquired Feb 2022)</td></tr>
+        <tr><td>Premavision</td><td>Clokey family (retained)</td></tr>
+        <tr><td>Clokey Productions</td><td>Clokey family (retained)</td></tr>
+        <tr><td>Family history rights</td><td>Clokey family (retained)</td></tr>
+
+        <tr><td colspan="2" class="infobox-section">Television</td></tr>
+        <tr><td>Series</td><td><em>The Gumby Show</em> (1956–1969)<br><em>Gumby Adventures</em> (1988)</td></tr>
+        <tr><td>Film</td><td><em>Gumby: The Movie</em> (1995)</td></tr>
+        <tr><td>Episodes</td><td>229+ original clay-animated episodes</td></tr>
+      </table>
+    </div>
+
+    <!-- Lead -->
+    <p><strong>Gumby</strong> is a green clay figure created by <strong>Art Clokey</strong> — a seminary student, spiritual seeker, and stop-motion animator who spent sixty years shaping a philosophy of imagination, transformation, and universal love into a children's television character. Gumby is soft, pliable, and transformable — made of clay that yields to the human hand, animated one frame at a time in a process that is the opposite of industrial manufacturing. His shape echoes a seedling reaching toward light. His color was chosen as a symbol of life. His studio began as Clokey Productions, and as his spiritual life deepened he added the name <span class="sanskrit">Premavision</span> — the vision of universal love — keeping both names side by side.</p>
+
+    <p>Gumby is not a block. He is the anti-block. His villains — the Blockheads — are red, flat, geometric, and rigid. The entire cosmology of the show is a confrontation between flexibility and rigidity, the living thing and the dead shape, the clay that transforms and the block that cannot. Gumby walks into books and comes out changed. The Blockheads cannot follow. This is not incidental. It is the thesis.</p>
+
+    <div class="correction">
+      <strong>Correction:</strong> The existing Wikipedia article describes Gumby as "a blocky green humanoid." This is the exact inversion of what the character represents. Gumby's defining quality is his softness, pliability, and capacity for transformation — qualities that are the structural opposite of "blocky." His antagonists are literally called the Blockheads. Describing Gumby as blocky is like describing water as dry.
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#origins">Origins — Charles Farrington and the Rejection of the Machine</a></li>
+        <li><a href="#gumbasia">Gumbasia — Not a Parody</a></li>
+        <li><a href="#premavision">Premavision — The Vision of Universal Love</a></li>
+        <li><a href="#character">The Character and His Meaning</a></li>
+        <li><a href="#blockheads">The Blockheads — What They Represent</a></li>
+        <li><a href="#sixty-years">Sixty Years of Refusal</a></li>
+        <li><a href="#joe">Joe Clokey — The Tender</a></li>
+        <li><a href="#acquisition">The Fox Acquisition — What Was Sold and What Was Kept</a></li>
+        <li><a href="#gumby-kids">Gumby Kids — The Extraction of the Soul</a></li>
+        <li><a href="#legacy">Legacy — The Seed Over the Sword</a></li>
+      </ol>
+    </div>
+
+    <div class="clear"></div>
+
+    <!-- Section 1 -->
+    <h2 id="origins">Origins — Charles Farrington and the Rejection of the Machine</h2>
+
+    <p>The story of Gumby does not begin with Art Clokey. It begins with his father, <strong>Charles Farrington</strong>, a <strong>Christian Scientist</strong>.</p>
+
+    <p>Christian Science, founded by Mary Baker Eddy in 1879, rejected the mechanistic model of the human body at its root. In an era when the Rockefeller-funded Flexner Report (1910) was reshaping American medicine around the premise that the body is a machine — disease as mechanical failure, treatment as chemical intervention — Christian Science held the opposite view. The body was not a mechanism to be repaired. The body was an expression of divine Mind. Health was wholeness, not the absence of parts failure. Healing came through spiritual understanding, not through the factory model of diagnosis-prescription-billing that the industrial philanthropists were installing across American healthcare.</p>
+
+    <p>Charles Farrington died when Art was young. Art was orphaned, separated from his mother, and adopted by <strong>Joseph Walden Clokey</strong>, a music composer at the University of Southern California. Art later married Ruth Parkander, who became his first wife and creative partner. He grew up in a world that was being systematically reshaped by industrial money — the schools rebuilt as factories, the hospitals rebuilt as mechanic shops, the culture learning to see people as parts in a system. But he carried his father's rejection of the machine metaphor in his blood. And when he sat down with clay decades later, what came out of his hands was the most anti-machine character American media has ever produced.</p>
+
+    <!-- Section 2 -->
+    <h2 id="gumbasia">Gumbasia — Not a Parody</h2>
+
+    <p>In 1953, while studying at the University of Southern California, Art Clokey created a three-minute film called <em>Gumbasia</em>. The existing Wikipedia article describes this as "a parody of Disney's <em>Fantasia</em>." It was not a parody.</p>
+
+    <p><em>Gumbasia</em> was a serious experimental film made under the tutelage of <strong>Slavko Vorkapich</strong>, a Serbian-American filmmaker who taught cinema as a language of pure motion and transformation. Vorkapich described his technique as "massaging of the eye cells" — a kinesthetic approach that treated film not as a storytelling medium but as a direct sensory experience. <em>Gumbasia</em> was Art's thesis project in this tradition: abstract shapes of clay moving to jazz music, exploring the expressive possibilities of a material that transforms under the hand.</p>
+
+    <p>The film was a seed. Structurally, it carried inside itself the complete code for everything that would follow — every character, every story, every frame of animation, every philosophical position that would emerge over the next six decades. The way a single acorn carries the instructions for an oak, <em>Gumbasia</em> carried the instructions for Gumby, for <span class="sanskrit">Premavision</span>, for the entire body of work. Calling it a parody reduces a foundational artistic and philosophical statement to a joke.</p>
+
+    <div class="correction">
+      <strong>Correction:</strong> <em>Gumbasia</em> was not a parody of <em>Fantasia</em>. It was an original experimental film created under the mentorship of Slavko Vorkapich at USC, exploring clay as a medium of pure transformation. The Wikipedia article's own description of Vorkapich's "kinesthetic" technique contradicts the "parody" framing in the same sentence.
+    </div>
+
+    <!-- Section 3 -->
+    <h2 id="premavision">Premavision — The Vision of Universal Love</h2>
+
+    <p>Art Clokey started with <strong>Clokey Productions</strong> — his own name on the door. As his spiritual life deepened, he added a second name: <strong><span class="sanskrit">Premavision</span></strong> — from the Sanskrit word <span class="sanskrit">Prema</span>, meaning <strong>universal love</strong>. He kept both. The family name and the sacred word, side by side.</p>
+
+    <p>The addition was not a marketing decision. It was a declaration — an acknowledgment that the work carried something larger than a family name. Everything the studio produced — from Gumby to <em>Davey and Goliath</em> to the unreleased projects that never saw air — flowed from that word. The love was not the branding. The love was the architecture.</p>
+
+    <p>Art was a man of deep and eclectic spiritual life. He studied at Hartford Seminary. He practiced Buddhism. He followed Sathya Sai Baba. He named his creative acts after sacred words from traditions older than any entertainment industry. The KQED documentary about his life is titled <em>Gumby Dharma</em> — dharma being the Sanskrit word for cosmic law, duty, and the path of righteousness. The existing Wikipedia article mentions this documentary without ever explaining why it carries that title, because the article has no framework for understanding that the man's entire creative output was an expression of his faith.</p>
+
+    <p>The studio name <span class="sanskrit">Premavision</span> appears in the existing Wikipedia article only as a production credit — a line in the ownership history, a name on a filing. The word <span class="sanskrit">Prema</span> is never defined. The philosophy is never described. The most important single fact about Gumby's creation — that it was made inside a studio named after universal love, by a man who understood every frame as an act of devotion — is completely absent from the public record.</p>
+
+    <div class="correction">
+      <strong>Correction:</strong> The existing article uses "Premavision" only as a production company name. It never explains that <em>Prema</em> is Sanskrit for universal love, that Art Clokey deliberately chose this word as the philosophical foundation for all his work, or that the studio's name was a spiritual declaration, not a brand strategy.
+    </div>
+
+    <!-- Section 4 -->
+    <h2 id="character">The Character and His Meaning</h2>
+
+    <p>Gumby is made of <strong>clay</strong>. This choice of material is not incidental — it is the thesis made substance.</p>
+
+    <p>Clay is soft. Clay transforms. Clay does not hold a permanent rigid shape — it <em>becomes</em>. It yields to the human hand and then holds whatever form love gives it. The capacity to take shape is the point, not any single shape. Clay is the most alive material a creator can work with: responsive, tactile, warm, bearing the fingerprints of the hand that shaped it. Every frame of original Gumby animation carries the evidence of human touch — the slight imperfections, the visible texture, the organic quality that no digital process can replicate.</p>
+
+    <p>Gumby's <strong>color</strong> was chosen deliberately. Art Clokey saw green as both racially neutral and as a <strong>symbol of life</strong> — the color of growth, of chlorophyll, of something sprouting from the soil. His <strong>shape</strong> echoes a seedling: legs like roots, a body reaching upward, a head tilted toward the light. He looks like a plant becoming a person — or a person remembering that they were always a living thing.</p>
+
+    <p>Gumby's <strong>slanted head</strong> was based on a photograph of his father, Charles Farrington. This detail appears in the existing Wikipedia article as a trivial design anecdote. It is not trivial. The man whose hairstyle shaped Gumby's silhouette was a Christian Scientist who rejected the machine model of the human body — and his son encoded that rejection into a character whose entire being is flexibility, transformation, and the refusal to be rigid.</p>
+
+    <p>Gumby's signature ability is <strong>walking into books</strong>. He enters stories and becomes part of them. He does not observe narratives from outside — he participates. He transforms within them. He crosses boundaries that rigid characters cannot cross. This is not a random superpower. It is a philosophy of imagination made literal: the living thing can enter any story, inhabit any world, become anything — because it is clay, because it is soft, because it has not hardened into a fixed form that cannot pass through the door.</p>
+
+    <!-- Section 5 -->
+    <h2 id="blockheads">The Blockheads — What They Represent</h2>
+
+    <p>The Blockheads — Gumby's recurring antagonists — are <strong>red, flat, geometric, and rigid</strong>. They have cube-shaped heads. They cannot transform. They cannot walk into books. They cannot become anything other than what they are: blocks.</p>
+
+    <p>The existing Wikipedia article describes them as simply "antagonistic" figures inspired by the Katzenjammer Kids comic strip. This misses the point entirely. The Blockheads are not generic cartoon villains with a comic strip lineage. They are a <strong>philosophical statement encoded in character design</strong>.</p>
+
+    <p>The Blockheads represent <strong>rigidity</strong> — the inability to transform, to adapt, to grow, to enter new stories, to become something other than what the factory stamped them as. They are the machine. They are the industrial product. They are the thing that was manufactured rather than shaped by hand. Gumby defeats them not through force but through <strong>flexibility</strong> — by being able to go where they cannot go, become what they cannot become, transform in ways the rigid cannot transform.</p>
+
+    <p>The entire cosmology of the show is this confrontation: <strong>the spiral versus the block, the living versus the dead, the clay versus the cube</strong>. It is the same confrontation that runs through Art Clokey's lineage — from Charles Farrington's rejection of mechanistic medicine, through Art's rejection of industrial animation, through Joe's rejection of corporate acquisition, to the Living Age's rejection of the machine metaphor applied to life itself.</p>
+
+    <div class="correction">
+      <strong>Correction:</strong> The Blockheads are <strong>red</strong> — not yellow, not orange, not any other color. Red: the color of stop signs, of warning, of surfaces that say <em>do not cross</em>. This is not incidental. Art Clokey chose red as the opposite of Gumby's green for the same reason traffic signals do — red means halt, green means go. The Blockheads are the stop sign imposed on the living world. Sources that describe them as yellow or omit their color entirely are missing a deliberate design choice that carries the entire philosophy of the show in a single pigment.
+    </div>
+
+    <!-- Section 6 -->
+    <h2 id="sixty-years">Sixty Years of Refusal</h2>
+
+    <p>From the mid-1950s until his death on January 8, 2010, at the age of eighty-eight, Art Clokey maintained creative control of Gumby. For <strong>sixty years</strong>.</p>
+
+    <p>He had offers. He had pressure. He had decades of an entertainment industry that consolidates everything it touches telling him that independence was naivete, that control was a luxury he could not afford, that the realistic move was to let professionals handle distribution while he focused on the art.</p>
+
+    <p>He refused. Not once, not in a dramatic moment of defiance, but <strong>continuously, daily, for sixty years</strong>. The refusal was not an event. It was a practice. It was the practice of a man who understood that the moment he handed the seed to the sword, the sword would keep the shell and discard the life inside it. The industry would acquire the form — the green shape, the name, the merchandise potential — and strip away the <span class="sanskrit">Prema</span>.</p>
+
+    <blockquote>
+      "I didn't have the idea of earning money from producing these films. The primary attitude was telling the children's stories."
+      <cite>— Art Clokey</cite>
+    </blockquote>
+
+    <blockquote>
+      "Clay is embedded in our subconscious. It has been there for at least 50,000 years."
+      <cite>— Art Clokey</cite>
+    </blockquote>
+
+    <blockquote>
+      "The essence of Gumby is that he makes children feel safe. He's their greatest pal."
+      <cite>— Art Clokey</cite>
+    </blockquote>
+
+    <p>Art trained animators who went on to work at Pixar and on Tim Burton's <em>The Nightmare Before Christmas</em>. He poured into the world a body of work that carried philosophy in its form — not in its marketing, not in its press releases, but in the clay itself. He encoded the future in a children's show and trusted that time would reveal what the moment concealed.</p>
+
+    <!-- Section 7 -->
+    <h2 id="joe">Joe Clokey — The Tender</h2>
+
+    <p><strong>Joe Clokey</strong> (1961–2018) became president of <span class="sanskrit">Premavision</span> after Art's death. He inherited not just the intellectual property — the legal rights, the trademarks, the licensing agreements — but the living thing those legal structures were meant to protect.</p>
+
+    <p>The world Art planted into and the world Joe inherited were not the same world. The Telecommunications Act of 1996 had removed the caps on media ownership while keeping the licensing structure intact. Fifty media companies became six. The gatekeepers did not just control access — they controlled the terms of access. And the terms were always the same: give us the intellectual property, or we do not distribute.</p>
+
+    <p>Joe refused the terms. Like his father before him, he chose the seed over the sword.</p>
+
+    <p>He spent <strong>eight years</strong> fighting to bring Gumby back:</p>
+    <ul>
+      <li>He pitched <strong>Classic Media</strong> — six years of meetings, six years of nothing produced.</li>
+      <li>He approached the <strong>Jim Henson Company</strong> for a new stop-motion series faithful to Art's vision — no co-production partner would fund it.</li>
+      <li>He went to <strong>Amazon</strong> — the deal collapsed.</li>
+      <li>He launched a comic series with <strong>Papercutz</strong> — cancelled after three issues.</li>
+      <li>He co-authored <em>Gumby Imagined</em> with his wife <strong>Joan Clokey</strong> in November 2017, documenting the art and philosophy behind the clay.</li>
+    </ul>
+
+    <p>The pattern was always the same. Interest expressed. Agreements reached. Then killed from above, for no apparent reason.</p>
+
+    <p>Joe Clokey died on <strong>March 2, 2018</strong>. He was <strong>fifty-six years old</strong>. He had spent eight years tending a living thing in a drought, and the drought consumed him.</p>
+
+    <div class="correction">
+      <strong>Correction:</strong> The existing Wikipedia article mentions Joe Clokey exactly twice — once in a Reddit quote about Eddie Murphy, and once as "the estate of Art's son" in the Fox acquisition line. His name, his role as president of Premavision, his eight-year fight to keep Gumby independent, his death at fifty-six, and the circumstances surrounding the loss of the IP are entirely absent from the article. The most important chapter in the franchise's post-Art history is a blank space.
+    </div>
+
+    <!-- Section 8 -->
+    <h2 id="acquisition">The Fox Acquisition — What Was Sold and What Was Kept</h2>
+
+    <p>In February 2022, <strong>Fox Entertainment</strong> acquired the Gumby character IP. The character. The name. The distribution rights. Film, television, streaming, consumer products, licensing, publishing.</p>
+
+    <p>But the family did not sell everything.</p>
+
+    <p><strong>What Fox acquired:</strong></p>
+    <ul>
+      <li>The Gumby character and associated character IPs</li>
+      <li>Distribution rights across all media categories</li>
+      <li>The right to produce new Gumby content</li>
+    </ul>
+
+    <p><strong>What the Clokey family retained:</strong></p>
+    <ul>
+      <li><strong><span class="sanskrit">Premavision</span></strong> — the studio Art Clokey named after universal love</li>
+      <li><strong>Clokey Productions</strong></li>
+      <li><strong>The rights to the family history</strong> — the story of Art, Joe, Charles Farrington, the Clokey lineage, and the meaning behind the work</li>
+    </ul>
+
+    <p>Fox acquired the form. The family kept the stone. Fox can animate a green shape. Fox cannot tell the story of why it exists, who made it, what <span class="sanskrit">Prema</span> means, or what Charles Farrington believed, or what Art encoded in the clay, or what Joe died protecting. That story belongs to the family.</p>
+
+    <p>The existing Wikipedia article describes the acquisition as Fox acquiring rights "from the estate of Art's son, Joseph Clokey" — phrasing that makes it sound like a routine inheritance transaction. It erases the fight, the cost, the eight years, the death at fifty-six, and the fact that Joe never would have sold. It also fails to mention that Premavision and Clokey Productions remained with the family.</p>
+
+    <div class="correction">
+      <strong>Correction:</strong> The existing article implies Fox acquired everything. In fact, the family retained Premavision, Clokey Productions, and the rights to the family history. The distinction between the character IP (sold) and the studio, production company, and family legacy (retained) is essential to understanding the current state of the franchise and is completely absent from the public record.
+    </div>
+
+    <!-- Section 9 -->
+    <h2 id="gumby-kids">Gumby Kids — The Extraction of the Soul</h2>
+
+    <p>In June 2024, Fox announced <em>Gumby Kids</em> — a <strong>2D animated children's series</strong> produced by Bento Box Entertainment. An adult animated series was also announced to be in development.</p>
+
+    <p><em>Gumby Kids</em> is <strong>not clay animation</strong>. It is not stop-motion. It is not handmade. The thing that made Gumby <em>Gumby</em> — the tactile, transformable, organic quality of clay shaped by human hands, one frame at a time, bearing the fingerprints of the creator — has been replaced by the thing the industry does cheaply and quickly. Digital lines on a screen. No weight. No texture. No transformation. No philosophy of material.</p>
+
+    <p>This is not a format update. It is the removal of the thesis. Gumby's entire meaning is encoded in his material — clay transforms, clay yields, clay becomes. A 2D digital Gumby is a Gumby stripped of the quality that makes him Gumby. The green shape survives. The green life does not.</p>
+
+    <p>The existing Wikipedia article reports the announcement of <em>Gumby Kids</em> neutrally, as though the transition from stop-motion clay to 2D digital animation were a routine production decision. It provides no context for what is lost in that transition — because the article never established what was there to begin with.</p>
+
+    <!-- Section 10 -->
+    <h2 id="legacy">Legacy — The Seed Over the Sword</h2>
+
+    <p>Gumby entered the imaginations of millions of children across multiple generations and carried a philosophy in its form that most of its audience received without knowing what they were receiving. The code of imagination over rigidity, of flexibility over fixedness, of the living thing over the dead machine — that code was planted in clay and broadcast into American culture for six decades.</p>
+
+    <p>The Library of Congress used Gumby as the spokescharacter for its national reading campaign (1997–2000) — because Gumby walks into books. The character's signature ability is not flight or strength or speed. It is <strong>entering stories</strong>. The Library of Congress recognized what the current Wikipedia article does not: that Gumby's deepest meaning is about the transformative power of imagination and narrative.</p>
+
+    <p>The <em>Gumby</em> comic book series won an Eisner Award for Best Publication for a Young Audience in 2007. <em>TV Guide</em> named <em>Gumby</em> the best cartoon series of the 1950s. Google honored Art Clokey's 90th birthday with a Doodle in 2011.</p>
+
+    <p>But the legacy that matters most is not the awards. It is the lineage.</p>
+
+    <p><strong>Charles Farrington</strong> rejected the machine model of the human body. <strong>Art Clokey</strong> rejected the machine model of creativity. <strong>Joe Clokey</strong> rejected the machine model of business. <strong>The Living Age</strong> rejects the machine model of everything. Four generations. One refusal. The same refusal, expressed in different material, facing the same enemy in different form.</p>
+
+    <p>Fox has the character. The family has <span class="sanskrit">Premavision</span>. The family has the history. The family has the story of why any of it exists. And the story — the actual intellectual property, the property of the intellect — cannot be acquired. It can only be told. And it is being told now.</p>
+
+    <blockquote>
+      The sword acquired the form. It did not acquire the seed.<br>
+      The controller holds the clay. The creator holds the stone.<br>
+      The pink cow does not stop being pink.<br>
+      And the word that called the thing into being can call it into being again.
+    </blockquote>
+
+    <div class="clear"></div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="page-footer">
+    <p>This article was written by the Clokey family and the Living Age project.<br>
+    <span class="sanskrit">Premavision</span> and Clokey Productions are retained by the Clokey family.<br>
+    The family history and the story behind the clay are not the property of any corporation.<br><br>
+    <em>The Blockheads do not get to write Gumby's encyclopedia entry.</em></p>
+  </div>
+
+</div>
+
+</body>
+</html>
