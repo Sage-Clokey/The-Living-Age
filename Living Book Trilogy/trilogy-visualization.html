@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Living Age Trilogy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #07090a;
+  --bg2: #0c0f0c;
+  --bg3: #0c1008;
+  --text: #ddd9cc;
+  --dim: #6a6860;
+  --green: #7a9e7e;
+  --gold: #b8973a;
+  --flame: #4aaa5a;
+  --red: #9e5a4a;
+  --line: rgba(255,255,255,0.07);
+  --max: 680px;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Jost', Helvetica, Arial, sans-serif;
+  --mono: 'Courier New', Courier, monospace;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-weight: 300;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 28px;
+  overflow: hidden;
+}
+
+.hero canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  letter-spacing: 0.08em;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+
+.hero-epigraph {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--dim);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.9;
+}
+
+.hero-epigraph em {
+  color: var(--green);
+  font-style: normal;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--dim);
+  animation: pulse 2.5s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* ===== SECTION LABELS ===== */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 40px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ===== MANIFESTO / STATS ===== */
+.manifesto {
+  background: var(--bg2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 100px 28px;
+}
+
+.manifesto-inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2px;
+  margin-bottom: 48px;
+}
+
+.stat-card {
+  background: var(--bg);
+  padding: 32px 24px;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.stat-card:hover {
+  background: var(--bg3);
+}
+
+.stat-number {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.action-breakdown {
+  margin-top: 48px;
+}
+
+.action-bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.action-bar-row .action-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.action-bar-row .action-name {
+  width: 160px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  flex-shrink: 0;
+}
+
+.action-bar-row .bar-track {
+  flex: 1;
+  height: 2px;
+  background: var(--line);
+  overflow: hidden;
+  position: relative;
+}
+
+.action-bar-row .bar-fill {
+  height: 100%;
+  transition: width 1.2s ease-out;
+}
+
+.action-bar-row .action-count {
+  width: 28px;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.dot-green { background: var(--green); }
+.dot-blue { background: #6a8fa7; }
+.dot-purple { background: #9a7ab8; }
+.dot-gold { background: var(--gold); }
+
+.fill-green { background: var(--green); }
+.fill-blue { background: #6a8fa7; }
+.fill-purple { background: #9a7ab8; }
+.fill-gold { background: var(--gold); }
+
+/* ===== LEGEND ===== */
+.legend {
+  max-width: var(--max);
+  margin: 0 auto 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* ===== TRILOGY CONTENT ===== */
+.trilogy-section {
+  padding: 100px 28px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.book {
+  margin-bottom: 4px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.book:hover {
+  border-color: rgba(255,255,255,0.12);
+}
+
+.book-header {
+  padding: 28px 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  user-select: none;
+  transition: background 0.3s;
+  background: var(--bg2);
+}
+
+.book-header:hover {
+  background: var(--bg3);
+}
+
+.book-number {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--green);
+  min-width: 64px;
+}
+
+.book-title {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 400;
+  color: var(--text);
+  flex: 1;
+  letter-spacing: 0.04em;
+}
+
+.book-tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--dim);
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .book-tagline { display: block; }
+}
+
+.book-count {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+
+.book-chevron {
+  color: var(--green);
+  font-size: 0.7rem;
+  transition: transform 0.4s ease;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.book.open .book-chevron {
+  transform: rotate(90deg);
+}
+
+.book-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.book.open .book-body {
+  max-height: 20000px;
+}
+
+/* ===== PARTS ===== */
+.part {
+  border-top: 1px solid var(--line);
+}
+
+.part-header {
+  padding: 20px 32px 20px 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  user-select: none;
+  transition: background 0.3s;
+}
+
+.part-header:hover {
+  background: rgba(122, 158, 126, 0.04);
+}
+
+.part-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  min-width: 64px;
+  opacity: 0.7;
+}
+
+.part-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--green);
+  flex: 1;
+  letter-spacing: 0.03em;
+}
+
+.part-count {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  color: var(--dim);
+}
+
+.part-chevron {
+  color: var(--gold);
+  font-size: 0.6rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.part.open .part-chevron {
+  transform: rotate(90deg);
+}
+
+.part-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.part.open .part-body {
+  max-height: 10000px;
+}
+
+/* ===== CHAPTERS ===== */
+.chapter {
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.chapter a {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 32px 16px 72px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+}
+
+.chapter a:hover {
+  background: rgba(122, 158, 126, 0.06);
+}
+
+.chapter a::after {
+  content: '\2197';
+  font-size: 0.7rem;
+  color: var(--dim);
+  opacity: 0;
+  transition: opacity 0.2s;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.chapter a:hover::after {
+  opacity: 0.6;
+}
+
+.chapter-type-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.chapter-num {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--dim);
+  min-width: 20px;
+  margin-top: 3px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+}
+
+.chapter-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.chapter-title {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.chapter-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.chapter-action-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 2px;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.tag-use_as_is { border-color: rgba(122,158,126,0.3); color: var(--green); }
+.tag-strip_production { border-color: rgba(106,143,167,0.3); color: #6a8fa7; }
+.tag-rewrite_as_prose { border-color: rgba(154,122,184,0.3); color: #9a7ab8; }
+.tag-write_new { border-color: rgba(184,151,58,0.3); color: var(--gold); }
+
+.chapter-source {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  color: #4a4840;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  letter-spacing: 0.5px;
+}
+
+.chapter.is-prologue .chapter-title,
+.chapter.is-epilogue .chapter-title {
+  font-style: italic;
+  color: var(--green);
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--line);
+  padding: 80px 28px;
+  text-align: center;
+}
+
+.footer-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: var(--dim);
+  max-width: 560px;
+  margin: 0 auto 32px;
+  line-height: 1.8;
+}
+
+.footer-quote em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.footer-credit {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0.5;
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== READER OVERLAY ===== */
+.reader-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1000;
+  background: var(--bg);
+  display: none;
+  flex-direction: column;
+}
+
+.reader-overlay.active {
+  display: flex;
+}
+
+.reader-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(7,9,10,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.reader-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.reader-close {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.reader-close:hover {
+  color: var(--text);
+  border-color: var(--green);
+}
+
+.reader-chapter-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.reader-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reader-btn {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.reader-btn:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--green);
+}
+
+.reader-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.reader-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.reader-content {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 60px 28px 120px;
+}
+
+.reader-content h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--text);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.reader-content h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  color: var(--green);
+  letter-spacing: 0.04em;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.reader-content h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-top: 36px;
+  margin-bottom: 12px;
+}
+
+.reader-content h4 {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.reader-content p {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.reader-content strong {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.reader-content em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.reader-content blockquote {
+  border-left: 2px solid var(--green);
+  padding: 16px 24px;
+  margin: 28px 0;
+  background: rgba(122, 158, 126, 0.04);
+}
+
+.reader-content blockquote p,
+.reader-content blockquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--dim);
+  margin-bottom: 0;
+}
+
+.reader-content blockquote em {
+  color: var(--gold);
+}
+
+.reader-content hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 40px 0;
+}
+
+.reader-content ul, .reader-content ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+.reader-content li {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.reader-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--green);
+  z-index: 1001;
+  transition: width 0.1s;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .manifesto { padding: 60px 20px; }
+  .trilogy-section { padding: 60px 16px; }
+  .book-header { padding: 20px 16px; gap: 12px; }
+  .part-header { padding: 16px 16px 16px 28px; }
+  .chapter a { padding: 12px 16px 12px 36px; }
+  .reader-nav { padding: 10px 16px; }
+  .reader-content { padding: 40px 20px 100px; }
+  .reader-btn { padding: 6px 10px; font-size: 0.55rem; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .action-bar-row .action-name { width: 100px; }
+  .hero { padding: 40px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <canvas id="spiralCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-label">the living book trilogy</div>
+    <h1>The Living Age</h1>
+    <div class="hero-subtitle">92 Chapters &middot; Three Books &middot; One Truth</div>
+    <div class="hero-epigraph">
+      "We work in the dark to serve the light.<br>We are <em>Sagents</em>."
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<!-- ===== STATS DASHBOARD ===== -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <div class="section-label reveal">at a glance</div>
+    <div class="stats-grid reveal" id="statsGrid"></div>
+    <div class="legend reveal" id="legend"></div>
+    <div class="action-breakdown reveal" id="actionBreakdown"></div>
+  </div>
+</section>
+
+<!-- ===== TRILOGY ===== -->
+<section class="trilogy-section">
+  <div class="section-label reveal">table of contents</div>
+  <div id="trilogy"></div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-quote">
+    <em>Clay to code.</em> Story to system.<br><em>The spiral defeats the block.</em>
+  </div>
+  <div class="footer-credit">the living age &middot; 2026</div>
+</footer>
+
+<!-- ===== READER OVERLAY ===== -->
+<div class="reader-overlay" id="readerOverlay">
+  <div class="reader-progress" id="readerProgress"></div>
+  <nav class="reader-nav">
+    <div class="reader-nav-left">
+      <button class="reader-close" id="readerClose">&#x2190; back</button>
+      <span class="reader-chapter-label" id="readerLabel"></span>
+    </div>
+    <div class="reader-nav-right">
+      <button class="reader-btn" id="readerPrev">&#9664; prev</button>
+      <button class="reader-btn" id="readerNext">next &#9654;</button>
+    </div>
+  </nav>
+  <div class="reader-body" id="readerBody">
+    <div class="reader-content" id="readerContent"></div>
+  </div>
+</div>
+
+<script>
+// ===================== FIBONACCI SPIRAL CANVAS =====================
+(function() {
+  const canvas = document.getElementById('spiralCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+  let frame = 0;
+
+  function draw() {
+    ctx.fillStyle = 'rgba(7,9,10,0.18)';
+    ctx.fillRect(0, 0, W, H);
+
+    const cx = W / 2;
+    const cy = H / 2;
+    const maxR = Math.min(W, H) * 0.42;
+    const dots = 300;
+
+    for (let i = 0; i < dots; i++) {
+      const t = i / dots;
+      const angle = i * goldenAngle + frame * 0.002;
+      const r = maxR * Math.sqrt(t);
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+
+      const hue = 45 + t * 90;
+      const sat = 55 - t * 15;
+      const lum = 32 + t * 23;
+      const size = 4 - t * 2.5;
+      const alpha = 0.15 + (1 - t) * 0.25;
+
+      ctx.beginPath();
+      ctx.arc(x, y, Math.max(size, 0.5), 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${hue}, ${sat}%, ${lum}%, ${alpha})`;
+      ctx.fill();
+    }
+
+    frame++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ===================== SCROLL REVEAL =====================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===================== DATA =====================
+const trilogy = [
+  {
+    id: "book1",
+    number: "Book I",
+    title: "The Sagent Creed",
+    tagline: "Who the Sagent is.",
+    parts: [
+      {
+        label: "Prologue",
+        title: "Hello, This Is Sage",
+        isPrologue: true,
+        chapters: [
+          { num: "P", title: "Hello, This Is Sage", action: "use_as_is", source: "writings/The Hello of Things (pp. 1\u20132)" }
+        ]
+      },
+      {
+        label: "Part 1",
+        title: "The Name, the Nature, and the Calling",
+        chapters: [
+          { num: "1", title: "The First Job Was Gardener, Not King", action: "rewrite_as_prose", source: "EP08 \u2014 The Sagent\u2019s Path" },
+          { num: "2", title: "Surrender and Strength", action: "rewrite_as_prose", source: "EP06 \u2014 The Seed Over Sword" },
+          { num: "3", title: "The Green Lightsaber", action: "rewrite_as_prose", source: "EP04 \u2014 The Green Lightsaber" },
+          { num: "4", title: "Dancing to Music No One Else Hears", action: "rewrite_as_prose", source: "EP07 \u2014 Dancing to Music No One Else Hears" }
+        ]
+      },
+      {
+        label: "Part 2",
+        title: "The Shaken Jar",
+        chapters: [
+          { num: "5", title: "The Shaken Jar", action: "rewrite_as_prose", source: "EP01 \u2014 The Shaken Jar" },
+          { num: "6", title: "The Hidden War", action: "use_as_is", source: "writings/the-hidden-war.md" },
+          { num: "7", title: "The Thornbush King", action: "rewrite_as_prose", source: "EP02 \u2014 The Thornbush King" },
+          { num: "8", title: "The King They Asked For", action: "use_as_is", source: "writings/the-king-they-asked-for.md" }
+        ]
+      },
+      {
+        label: "Part 3",
+        title: "The Architecture of a Free Conscience",
+        chapters: [
+          { num: "9", title: "No Chain of Command Between Humans", action: "write_new", source: "" },
+          { num: "10", title: "Persuasion Over Force", action: "rewrite_as_prose", source: "EP05 \u2014 Sacred Mischief" },
+          { num: "11", title: "The Builder and the Pink Cow", action: "use_as_is", source: "writings/the-builder-and-the-pink-cow.md" },
+          { num: "12", title: "Principled Love", action: "write_new", source: "" },
+          { num: "13", title: "Power as Stewardship", action: "rewrite_as_prose", source: "EP03 \u2014 Spirals and Squares" }
+        ]
+      },
+      {
+        label: "Part 4",
+        title: "The Fibonacci Spiral Through the Generations",
+        chapters: [
+          { num: "14", title: "The Seed Over Sword", action: "write_new", source: "" },
+          { num: "15", title: "The Names That Wrote Themselves", action: "use_as_is", source: "writings/the-names-that-wrote-themselves.md" },
+          { num: "16", title: "Art and the Green Knight", action: "write_new", source: "" },
+          { num: "17", title: "Joe and the Storm", action: "write_new", source: "" },
+          { num: "18", title: "The Storm Spreads the Seeds", action: "write_new", source: "" },
+          { num: "19", title: "Gumby and the Cartel", action: "use_as_is", source: "writings/gumby-and-the-cartel.md" }
+        ]
+      },
+      {
+        label: "Part 5",
+        title: "Sheep Among Wolves",
+        chapters: [
+          { num: "20", title: "The Enemy That Feeds on Conflict", action: "write_new", source: "" },
+          { num: "21", title: "Roots, Not Branches", action: "write_new", source: "" },
+          { num: "22", title: "The Blue to the Green", action: "write_new", source: "" },
+          { num: "23", title: "The Sagent Narrative", action: "use_as_is", source: "writings/the-sagent-narrative.md" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "book2",
+    number: "Book II",
+    title: "The Spiral and the Block",
+    tagline: "The war between living order and empire.",
+    parts: [
+      {
+        label: "Prologue",
+        title: "The Stories Already Know",
+        isPrologue: true,
+        chapters: [
+          { num: "P", title: "The Stories Already Know", action: "strip_production", source: "EP00 \u2014 Series Intro" }
+        ]
+      },
+      {
+        label: "Part 1",
+        title: "The True Republic",
+        chapters: [
+          { num: "1", title: "Why Empires Always Collapse", action: "strip_production", source: "Video 01 \u2014 Why Empires Always Collapse" },
+          { num: "2", title: "The Spiral vs. the Block", action: "strip_production", source: "Video 02 \u2014 The Spiral vs The Block" },
+          { num: "3", title: "Civilization Is a Living System", action: "strip_production", source: "Video 03 \u2014 Civilization Is a Living System" },
+          { num: "4", title: "Is Government Authority Real?", action: "rewrite_as_prose", source: "EP01 \u2014 Is Government Authority Real" },
+          { num: "5", title: "Who Owns Your Life?", action: "rewrite_as_prose", source: "EP02 \u2014 Who Owns Your Life" },
+          { num: "6", title: "Would Society Collapse Without Government?", action: "rewrite_as_prose", source: "EP03 \u2014 Would Society Collapse" },
+          { num: "7", title: "Do Laws Create Morality?", action: "rewrite_as_prose", source: "EP04 \u2014 Do Laws Create Morality" },
+          { num: "8", title: "What Is a True Republic?", action: "rewrite_as_prose", source: "EP05 \u2014 What Is a True Republic" },
+          { num: "9", title: "Where Does Law Come From?", action: "strip_production", source: "Bridge Video \u2014 Where Does Law Come From" }
+        ]
+      },
+      {
+        label: "Part 2",
+        title: "The Mythology of Media",
+        chapters: [
+          { num: "10", title: "Star Wars: The Backwards Fibonacci Spiral", action: "rewrite_as_prose", source: "EP01 \u2014 Star Wars" },
+          { num: "11", title: "The Three Skywalkers", action: "rewrite_as_prose", source: "ORIGINS/EP06C \u2014 Three Skywalkers" },
+          { num: "12", title: "Luke and the Will of the Force", action: "rewrite_as_prose", source: "ORIGINS/EP06B \u2014 Luke" },
+          { num: "13", title: "Maul the Shadow Lord", action: "use_as_is", source: "chapter_drafts/maul_shadow_lord.md" },
+          { num: "14", title: "The Force Dyad and the Scattered Temple", action: "use_as_is", source: "chapter_drafts/book2_ch14.md" },
+          { num: "15", title: "Unshake the Jar", action: "use_as_is", source: "chapter_drafts/book2_ch15.md" },
+          { num: "16", title: "Avatar: Balance vs. Domination", action: "rewrite_as_prose", source: "EP02 \u2014 Avatar" },
+          { num: "17", title: "The Green Flame", action: "strip_production", source: "EP02B \u2014 Avatar: The Green Flame" },
+          { num: "18", title: "Neutral Jing", action: "use_as_is", source: "chapter_drafts/neutral_jing.md" },
+          { num: "19", title: "Lord of the Rings: The Ring of Centralized Power", action: "rewrite_as_prose", source: "EP03 \u2014 Lord of the Rings" },
+          { num: "20", title: "The Hobbit and the Shire", action: "use_as_is", source: "writings/the-hobbit-and-the-shire.md" },
+          { num: "21", title: "Loki: The Sacred Trickster", action: "rewrite_as_prose", source: "EP04 \u2014 Loki" },
+          { num: "22", title: "Thor and Asgard: The Fall of Arrogant Gods", action: "rewrite_as_prose", source: "EP05 \u2014 Thor and Asgard" },
+          { num: "23", title: "Ragnarok, Arthur, and the Green Return", action: "use_as_is", source: "writings/ragnarok-and-the-green-return.md" },
+          { num: "24", title: "The Matrix: The Architecture of Control", action: "rewrite_as_prose", source: "EP06 \u2014 The Matrix" },
+          { num: "25", title: "Nothing Is True, Everything Is Permitted", action: "strip_production", source: "Assassin\u2019s Creed script" },
+          { num: "26", title: "The Sokovia Problem", action: "use_as_is", source: "writings/the-sokovia-problem.md" }
+        ]
+      },
+      {
+        label: "Part 3",
+        title: "The Eight Pillars",
+        chapters: [
+          { num: "26", title: "Pillar I: Life Is Decentralized", action: "rewrite_as_prose", source: "PILLAR 1" },
+          { num: "27", title: "Pillar II: Truth Emerges from Individuals", action: "rewrite_as_prose", source: "PILLAR 2" },
+          { num: "28", title: "Pillar III: Power Corrupts Centralized Systems", action: "rewrite_as_prose", source: "PILLAR 3" },
+          { num: "29", title: "Pillar IV: Voluntary Cooperation Is Natural", action: "rewrite_as_prose", source: "PILLAR 4" },
+          { num: "30", title: "Pillar V: Wisdom Transcends Authority", action: "rewrite_as_prose", source: "PILLAR 5" },
+          { num: "31", title: "Pillar VI: Stories Shape Civilizations", action: "rewrite_as_prose", source: "PILLAR 6" },
+          { num: "32", title: "Pillar VII: The Individual Is Sacred", action: "rewrite_as_prose", source: "PILLAR 7" },
+          { num: "33", title: "Pillar VIII: The Spiral Is the Pattern of Life", action: "rewrite_as_prose", source: "PILLAR 8" }
+        ]
+      },
+      {
+        label: "Part 4",
+        title: "The Perfect Agent",
+        chapters: [
+          { num: "34", title: "The Perfect Agent: Bible and Quran", action: "use_as_is", source: "writings/the-perfect-agent-bible-and-quran.md" },
+          { num: "35", title: "The Skywalker Spiral", action: "rewrite_as_prose", source: "EP09 \u2014 The Skywalker Spiral" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "book3",
+    number: "Book III",
+    title: "The Spiral Steward",
+    tagline: "The proof written in the language of creation itself.",
+    parts: [
+      {
+        label: "Prologue",
+        title: "A Note Before the First Word",
+        isPrologue: true,
+        chapters: [
+          { num: "P", title: "A Note Before the First Word", action: "write_new", source: "" }
+        ]
+      },
+      {
+        label: "Part 1",
+        title: "The Industrial Error and the Living Age",
+        chapters: [
+          { num: "1", title: "The Industrial Error", action: "use_as_is", source: "writings/The Hello of Things (pp. 9\u201311)" },
+          { num: "2", title: "The Men Who Made People Into Parts", action: "write_new", source: "chapter_drafts/book3_ch02.md" },
+          { num: "3", title: "The Death Pledge and the Cabin", action: "use_as_is", source: "chapter_drafts/book3_ch03.md" },
+          { num: "4", title: "Life Is Not a Machine", action: "use_as_is", source: "writings/life-is-not-a-machine.md" },
+          { num: "5", title: "The Wild Is the Place of True Order", action: "use_as_is", source: "chapter_drafts/the_wild_is_true_order.md" },
+          { num: "6", title: "The Necessary Death", action: "use_as_is", source: "chapter_drafts/book3_ch06.md" },
+          { num: "7", title: "The Green Flame: A Declaration", action: "use_as_is", source: "chapter_drafts/book3_ch07.md" }
+        ]
+      },
+      {
+        label: "Part 2",
+        title: "Austrian Economics Meets Molecular Biology",
+        chapters: [
+          { num: "8", title: "Spontaneous Order in the Cell", action: "use_as_is", source: "writings/austrian-economics-meets-molecular-biology.md" },
+          { num: "9", title: "The Knowledge Problem Is Biological", action: "write_new", source: "" },
+          { num: "10", title: "Your Cells Dont Have a King", action: "use_as_is", source: "chapter_drafts/book3_ch10.md" },
+          { num: "11", title: "The Entrepreneur and the Central Planner in Biology", action: "write_new", source: "" },
+          { num: "12", title: "The Disease Is the State", action: "use_as_is", source: "chapter_drafts/book3_the_disease_is_the_state.md" },
+          { num: "13", title: "Diversity Is Functional", action: "use_as_is", source: "chapter_drafts/book3_diversity_is_functional.md" },
+          { num: "14", title: "The Genome of Liberty", action: "rewrite_as_prose", source: "BRIDGE 5 \u2014 The Genome of Liberty" }
+        ]
+      },
+      {
+        label: "Part 3",
+        title: "How a Forest Becomes a Forest",
+        chapters: [
+          { num: "15", title: "How a Forest Becomes a Forest", action: "rewrite_as_prose", source: "BRIDGE 3 \u2014 How a Forest Becomes a Forest" },
+          { num: "16", title: "The Storm and the Seeds", action: "write_new", source: "" },
+          { num: "17", title: "What Bioinformatics Taught Me About Freedom", action: "rewrite_as_prose", source: "BRIDGE 1 \u2014 Bioinformatics and Freedom" },
+          { num: "18", title: "Bioinformatics as Stewardship of Living Order", action: "rewrite_as_prose", source: "BRIDGE 6 \u2014 Bioinformatics as Stewardship" }
+        ]
+      },
+      {
+        label: "Part 4",
+        title: "Living Algorithms",
+        chapters: [
+          { num: "19", title: "Living Algorithms", action: "rewrite_as_prose", source: "BRIDGE 7 \u2014 Living Algorithms" },
+          { num: "20", title: "Why Genome Browsers Are Hard to Use", action: "rewrite_as_prose", source: "BRIDGE 8 \u2014 Genome Browsers" },
+          { num: "21", title: "Evolution as Gods Proactive Creation", action: "use_as_is", source: "chapter_drafts/book3_ch19.md" },
+          { num: "22", title: "The Immune Economy and the Fatal Syringe", action: "use_as_is", source: "chapter_drafts/book3_ch20.md" },
+          { num: "23", title: "The Fatal Conceit of Biology", action: "use_as_is", source: "Book III - The Spiral Steward/Part 4 - Living Algorithms/Chapter 18 - The Fatal Conceit of Biology.md" }
+        ]
+      },
+      {
+        label: "Part 5",
+        title: "LivingWorks - The Tool",
+        chapters: [
+          { num: "24", title: "The Spiral Steward: A New Role", action: "strip_production", source: "THE_SPIRAL_STEWARD.md" },
+          { num: "25", title: "LivingWorks: The CAD System for the Living Age", action: "strip_production", source: "LIVINGWORKS_VISION.md" },
+          { num: "26", title: "The Design", action: "strip_production", source: "LIVINGWORKS_DESIGN.md" },
+          { num: "27", title: "The Navigation", action: "strip_production", source: "LIVINGWORKS_NAVIGATION.md" },
+          { num: "28", title: "Why This Requires Many Disciplines", action: "rewrite_as_prose", source: "BRIDGE 4 \u2014 LivingWorks" }
+        ]
+      },
+      {
+        label: "Epilogue",
+        title: "The Living Age",
+        isEpilogue: true,
+        chapters: [
+          { num: "E", title: "The Living Age", action: "strip_production", source: "CHANNEL_VISION.md" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "appendices",
+    number: "Appendices",
+    title: "Appendices",
+    tagline: "Reference materials and declarations.",
+    parts: [
+      {
+        label: "",
+        title: "Appendices",
+        chapters: [
+          { num: "A", title: "The Clokey-Gumby Timeline", action: "use_as_is", source: "writings/clokey-gumby-epstein-timeline.md" },
+          { num: "B", title: "Parallel Cases", action: "write_new", source: "" },
+          { num: "C", title: "The Sagent Creed (Unabridged)", action: "write_new", source: "" },
+          { num: "D", title: "Spirals and Squares: The Visual Language", action: "write_new", source: "" }
+        ]
+      }
+    ]
+  }
+];
+
+const actionLabels = {
+  use_as_is: "original",
+  strip_production: "cleaned",
+  rewrite_as_prose: "rewritten",
+  write_new: "new"
+};
+
+const actionDotClass = {
+  use_as_is: "dot-green",
+  strip_production: "dot-blue",
+  rewrite_as_prose: "dot-purple",
+  write_new: "dot-gold"
+};
+
+const actionFillClass = {
+  use_as_is: "fill-green",
+  strip_production: "fill-blue",
+  rewrite_as_prose: "fill-purple",
+  write_new: "fill-gold"
+};
+
+// ===================== COMPUTE STATS =====================
+function computeStats() {
+  let total = 0;
+  const perBook = {};
+  const perAction = { use_as_is: 0, strip_production: 0, rewrite_as_prose: 0, write_new: 0 };
+
+  trilogy.forEach(book => {
+    let count = 0;
+    book.parts.forEach(p => p.chapters.forEach(ch => { total++; count++; perAction[ch.action]++; }));
+    perBook[book.number] = count;
+  });
+
+  return { total, perBook, perAction };
+}
+
+// ===================== RENDER STATS =====================
+(function renderStats() {
+  const stats = computeStats();
+  const grid = document.getElementById('statsGrid');
+
+  grid.innerHTML = `
+    <div class="stat-card"><div class="stat-number">${stats.total}</div><div class="stat-label">chapters</div></div>
+    ${Object.entries(stats.perBook).map(([name, count]) =>
+      `<div class="stat-card"><div class="stat-number">${count}</div><div class="stat-label">${name}</div></div>`
+    ).join('')}
+  `;
+
+  const legend = document.getElementById('legend');
+  legend.innerHTML = `
+    <div class="legend-item"><div class="legend-dot dot-green"></div>original essay</div>
+    <div class="legend-item"><div class="legend-dot dot-blue"></div>cleaned script</div>
+    <div class="legend-item"><div class="legend-dot dot-purple"></div>rewritten as prose</div>
+    <div class="legend-item"><div class="legend-dot dot-gold"></div>new chapter</div>
+  `;
+
+  const breakdown = document.getElementById('actionBreakdown');
+  const maxAction = Math.max(...Object.values(stats.perAction));
+  const labels = { use_as_is: 'original essay', strip_production: 'cleaned script', rewrite_as_prose: 'rewritten', write_new: 'new chapter' };
+
+  breakdown.innerHTML = Object.entries(stats.perAction).map(([key, count]) => {
+    const pct = (count / maxAction * 100).toFixed(1);
+    return `<div class="action-bar-row">
+      <div class="action-dot ${actionDotClass[key]}"></div>
+      <div class="action-name">${labels[key]}</div>
+      <div class="bar-track"><div class="bar-fill ${actionFillClass[key]}" style="width:${pct}%"></div></div>
+      <div class="action-count">${count}</div>
+    </div>`;
+  }).join('');
+})();
+
+// ===================== PDF PATH MAP =====================
+// Maps from CHAPTER_MAP.py — every chapter's relative PDF path
+const pdfPaths = {
+  // Book I
+  "book1|Prologue|P": "Book I - The Sagent Creed/Prologue/Prologue - Hello, This Is Sage.pdf",
+  "book1|Part 1|1": "Book I - The Sagent Creed/Part 1 - The Name, the Nature, and the Calling/Chapter 01 - The First Job Was Gardener, Not King.pdf",
+  "book1|Part 1|2": "Book I - The Sagent Creed/Part 1 - The Name, the Nature, and the Calling/Chapter 02 - Surrender and Strength.pdf",
+  "book1|Part 1|3": "Book I - The Sagent Creed/Part 1 - The Name, the Nature, and the Calling/Chapter 03 - The Green Lightsaber.pdf",
+  "book1|Part 1|4": "Book I - The Sagent Creed/Part 1 - The Name, the Nature, and the Calling/Chapter 04 - Dancing to Music No One Else Hears.pdf",
+  "book1|Part 2|5": "Book I - The Sagent Creed/Part 2 - The Shaken Jar/Chapter 05 - The Shaken Jar.pdf",
+  "book1|Part 2|6": "Book I - The Sagent Creed/Part 2 - The Shaken Jar/Chapter 06 - The Hidden War.pdf",
+  "book1|Part 2|7": "Book I - The Sagent Creed/Part 2 - The Shaken Jar/Chapter 07 - The Thornbush King.pdf",
+  "book1|Part 2|8": "Book I - The Sagent Creed/Part 2 - The Shaken Jar/Chapter 08 - The King They Asked For.pdf",
+  "book1|Part 3|9": "Book I - The Sagent Creed/Part 3 - The Architecture of a Free Conscience/Chapter 09 - No Chain of Command Between Humans.pdf",
+  "book1|Part 3|10": "Book I - The Sagent Creed/Part 3 - The Architecture of a Free Conscience/Chapter 10 - Persuasion Over Force.pdf",
+  "book1|Part 3|11": "Book I - The Sagent Creed/Part 3 - The Architecture of a Free Conscience/Chapter 11 - The Builder and the Pink Cow.pdf",
+  "book1|Part 3|12": "Book I - The Sagent Creed/Part 3 - The Architecture of a Free Conscience/Chapter 12 - Principled Love.pdf",
+  "book1|Part 3|13": "Book I - The Sagent Creed/Part 3 - The Architecture of a Free Conscience/Chapter 13 - Power as Stewardship.pdf",
+  "book1|Part 4|14": "Book I - The Sagent Creed/Part 4 - The Fibonacci Spiral Through the Generations/Chapter 14 - The Seed Over Sword.pdf",
+  "book1|Part 4|15": "Book I - The Sagent Creed/Part 4 - The Fibonacci Spiral Through the Generations/Chapter 15 - The Names That Wrote Themselves.pdf",
+  "book1|Part 4|16": "Book I - The Sagent Creed/Part 4 - The Fibonacci Spiral Through the Generations/Chapter 16 - Art and the Green Knight.pdf",
+  "book1|Part 4|17": "Book I - The Sagent Creed/Part 4 - The Fibonacci Spiral Through the Generations/Chapter 17 - Joe and the Storm.pdf",
+  "book1|Part 4|18": "Book I - The Sagent Creed/Part 4 - The Fibonacci Spiral Through the Generations/Chapter 18 - The Storm Spreads the Seeds.pdf",
+  "book1|Part 4|19": "Book I - The Sagent Creed/Part 4 - The Fibonacci Spiral Through the Generations/Chapter 19 - Gumby and the Cartel.pdf",
+  "book1|Part 5|20": "Book I - The Sagent Creed/Part 5 - Sheep Among Wolves/Chapter 20 - The Enemy That Feeds on Conflict.pdf",
+  "book1|Part 5|21": "Book I - The Sagent Creed/Part 5 - Sheep Among Wolves/Chapter 21 - Roots, Not Branches.pdf",
+  "book1|Part 5|22": "Book I - The Sagent Creed/Part 5 - Sheep Among Wolves/Chapter 22 - The Blue to the Green.pdf",
+  "book1|Part 5|23": "Book I - The Sagent Creed/Part 5 - Sheep Among Wolves/Chapter 23 - The Sagent Narrative.pdf",
+  // Book II
+  "book2|Prologue|P": "Book II - The Spiral and the Block/Prologue/Prologue - The Stories Already Know.pdf",
+  "book2|Part 1|1": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 01 - Why Empires Always Collapse.pdf",
+  "book2|Part 1|2": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 02 - The Spiral vs the Block.pdf",
+  "book2|Part 1|3": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 03 - Civilization Is a Living System.pdf",
+  "book2|Part 1|4": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 04 - Is Government Authority Real.pdf",
+  "book2|Part 1|5": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 05 - Who Owns Your Life.pdf",
+  "book2|Part 1|6": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 06 - Would Society Collapse Without Government.pdf",
+  "book2|Part 1|7": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 07 - Do Laws Create Morality.pdf",
+  "book2|Part 1|8": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 08 - What Is a True Republic.pdf",
+  "book2|Part 1|9": "Book II - The Spiral and the Block/Part 1 - The True Republic/Chapter 09 - Where Does Law Come From.pdf",
+  "book2|Part 2|10": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 10 - Star Wars - The Backwards Fibonacci Spiral.pdf",
+  "book2|Part 2|11": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 11 - The Three Skywalkers.pdf",
+  "book2|Part 2|12": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 12 - Luke and the Will of the Force.pdf",
+  "book2|Part 2|13": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 13 - Maul the Shadow Lord.pdf",
+  "book2|Part 2|14": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 14 - Unshake the Jar.pdf",
+  "book2|Part 2|15": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 15 - Avatar - Balance vs Domination.pdf",
+  "book2|Part 2|16": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 16 - The Green Flame.pdf",
+  "book2|Part 2|17": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 17 - Neutral Jing.pdf",
+  "book2|Part 2|18": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 18 - Lord of the Rings - The Ring of Centralized Power.pdf",
+  "book2|Part 2|19": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 19 - The Hobbit and the Shire.pdf",
+  "book2|Part 2|20": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 20 - Loki - The Sacred Trickster.pdf",
+  "book2|Part 2|21": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 21 - Thor and Asgard - The Fall of Arrogant Gods.pdf",
+  "book2|Part 2|22": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 22 - Ragnarok, Arthur, and the Green Return.pdf",
+  "book2|Part 2|23": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 23 - The Matrix - The Architecture of Control.pdf",
+  "book2|Part 2|24": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 24 - Nothing Is True, Everything Is Permitted.pdf",
+  "book2|Part 2|25": "Book II - The Spiral and the Block/Part 2 - The Mythology of Media/Chapter 25 - The Sokovia Problem.pdf",
+  "book2|Part 3|26": "Book II - The Spiral and the Block/Part 3 - The Eight Pillars/Chapter 26 - Pillar I - Life Is Decentralized.pdf",
+  "book2|Part 3|27": "Book II - The Spiral and the Block/Part 3 - The Eight Pillars/Chapter 27 - Pillar II - Truth Emerges from Individuals.pdf",
+  "book2|Part 3|28": "Book II - The Spiral and the Block/Part 3 - The Eight Pillars/Chapter 28 - Pillar III - Power Corrupts Centralized Systems.pdf",
+  "book2|Part 3|29": "Book II - The Spiral and the Block/Part 3 - The Eight Pillars/Chapter 29 - Pillar IV - Voluntary Cooperation Is Natural.pdf",
+  "book2|Part 3|30": "Book II - The Spiral and the Block/Part 3 - The Eight Pillars/Chapter 30 - Pillar V - Wisdom Transcends Authority.pdf",
+  "book2|Part 3|31": "Book II - The Spiral and the Block/Part 3 - The Eight Pillars/Chapter 31 - Pillar VI - Stories Shape Civilizations.pdf",
+  "book2|Part 3|32": "Book II - The Spiral and the Block/Part 3 - The Eight Pillars/Chapter 32 - Pillar VII - The Individual Is Sacred.pdf",
+  "book2|Part 3|33": "Book II - The Spiral and the Block/Part 3 - The Eight Pillars/Chapter 33 - Pillar VIII - The Spiral Is the Pattern of Life.pdf",
+  "book2|Part 4|34": "Book II - The Spiral and the Block/Part 4 - The Perfect Agent/Chapter 34 - The Perfect Agent - Bible and Quran.pdf",
+  "book2|Part 4|35": "Book II - The Spiral and the Block/Part 4 - The Perfect Agent/Chapter 35 - The Skywalker Spiral.pdf",
+  // Book III
+  "book3|Prologue|P": "Book III - The Spiral Steward/Prologue/Prologue - A Note Before the First Word.pdf",
+  "book3|Part 1|1": "Book III - The Spiral Steward/Part 1 - The Industrial Error and the Living Age/Chapter 01 - The Industrial Error.pdf",
+  "book3|Part 1|2": "Book III - The Spiral Steward/Part 1 - The Industrial Error and the Living Age/Chapter 02 - The Men Who Made People Into Parts.pdf",
+  "book3|Part 1|3": "Book III - The Spiral Steward/Part 1 - The Industrial Error and the Living Age/Chapter 03 - The Death Pledge and the Cabin.pdf",
+  "book3|Part 1|4": "Book III - The Spiral Steward/Part 1 - The Industrial Error and the Living Age/Chapter 04 - Life Is Not a Machine.pdf",
+  "book3|Part 1|5": "Book III - The Spiral Steward/Part 1 - The Industrial Error and the Living Age/Chapter 05 - The Wild Is the Place of True Order.pdf",
+  "book3|Part 1|6": "Book III - The Spiral Steward/Part 1 - The Industrial Error and the Living Age/Chapter 06 - The Necessary Death.pdf",
+  "book3|Part 1|7": "Book III - The Spiral Steward/Part 1 - The Industrial Error and the Living Age/Chapter 07 - The Green Flame - A Declaration.pdf",
+  "book3|Part 2|8": "Book III - The Spiral Steward/Part 2 - Austrian Economics Meets Molecular Biology/Chapter 08 - Spontaneous Order in the Cell.pdf",
+  "book3|Part 2|9": "Book III - The Spiral Steward/Part 2 - Austrian Economics Meets Molecular Biology/Chapter 09 - The Knowledge Problem Is Biological.pdf",
+  "book3|Part 2|10": "Book III - The Spiral Steward/Part 2 - Austrian Economics Meets Molecular Biology/Chapter 10 - Your Cells Dont Have a King.pdf",
+  "book3|Part 2|11": "Book III - The Spiral Steward/Part 2 - Austrian Economics Meets Molecular Biology/Chapter 11 - The Entrepreneur and the Central Planner in Biology.pdf",
+  "book3|Part 2|12": "Book III - The Spiral Steward/Part 2 - Austrian Economics Meets Molecular Biology/Chapter 12 - The Disease Is the State.pdf",
+  "book3|Part 2|13": "Book III - The Spiral Steward/Part 2 - Austrian Economics Meets Molecular Biology/Chapter 13 - Diversity Is Functional.pdf",
+  "book3|Part 2|14": "Book III - The Spiral Steward/Part 2 - Austrian Economics Meets Molecular Biology/Chapter 14 - The Genome of Liberty.pdf",
+  "book3|Part 3|15": "Book III - The Spiral Steward/Part 3 - How a Forest Becomes a Forest/Chapter 15 - How a Forest Becomes a Forest.pdf",
+  "book3|Part 3|16": "Book III - The Spiral Steward/Part 3 - How a Forest Becomes a Forest/Chapter 16 - The Storm and the Seeds.pdf",
+  "book3|Part 3|17": "Book III - The Spiral Steward/Part 3 - How a Forest Becomes a Forest/Chapter 17 - What Bioinformatics Taught Me About Freedom.pdf",
+  "book3|Part 3|18": "Book III - The Spiral Steward/Part 3 - How a Forest Becomes a Forest/Chapter 18 - Bioinformatics as Stewardship of Living Order.pdf",
+  "book3|Part 4|19": "Book III - The Spiral Steward/Part 4 - Living Algorithms/Chapter 19 - Living Algorithms.pdf",
+  "book3|Part 4|20": "Book III - The Spiral Steward/Part 4 - Living Algorithms/Chapter 20 - Why Genome Browsers Are Hard to Use.pdf",
+  "book3|Part 4|21": "Book III - The Spiral Steward/Part 4 - Living Algorithms/Chapter 21 - Evolution as Gods Proactive Creation.pdf",
+  "book3|Part 4|22": "Book III - The Spiral Steward/Part 4 - Living Algorithms/Chapter 22 - The Immune Economy and the Fatal Syringe.pdf",
+  "book3|Part 4|23": "Book III - The Spiral Steward/Part 4 - Living Algorithms/Chapter 23 - The Fatal Conceit of Biology.pdf",
+  "book3|Part 5|24": "Book III - The Spiral Steward/Part 5 - LivingWorks - The Tool/Chapter 24 - The Spiral Steward - A New Role.pdf",
+  "book3|Part 5|25": "Book III - The Spiral Steward/Part 5 - LivingWorks - The Tool/Chapter 25 - LivingWorks - The CAD System for the Living Age.pdf",
+  "book3|Part 5|26": "Book III - The Spiral Steward/Part 5 - LivingWorks - The Tool/Chapter 26 - The Design.pdf",
+  "book3|Part 5|27": "Book III - The Spiral Steward/Part 5 - LivingWorks - The Tool/Chapter 27 - The Navigation.pdf",
+  "book3|Part 5|28": "Book III - The Spiral Steward/Part 5 - LivingWorks - The Tool/Chapter 28 - Why This Requires Many Disciplines.pdf",
+  "book3|Epilogue|E": "Book III - The Spiral Steward/Epilogue/Epilogue - The Living Age.pdf",
+  // Appendices
+  "appendices||A": "Appendices/Appendix A - The Clokey-Gumby Timeline.pdf",
+  "appendices||B": "Appendices/Appendix B - Parallel Cases.pdf",
+  "appendices||C": "Appendices/Appendix C - The Sagent Creed (Unabridged).pdf",
+  "appendices||D": "Appendices/Appendix D - Spirals and Squares - The Visual Language.pdf",
+};
+
+function getPdfHref(bookId, partLabel, chNum) {
+  const key = `${bookId}|${partLabel}|${chNum}`;
+  const path = pdfPaths[key];
+  return path ? encodeURI(path) : null;
+}
+
+// ===================== RENDER TRILOGY =====================
+(function renderTrilogy() {
+  const container = document.getElementById('trilogy');
+
+  trilogy.forEach(book => {
+    const bookEl = document.createElement('div');
+    bookEl.className = 'book reveal';
+    bookEl.id = book.id;
+    observer.observe(bookEl);
+
+    let totalChapters = 0;
+    book.parts.forEach(p => totalChapters += p.chapters.length);
+
+    let html = `
+      <div class="book-header">
+        <span class="book-number">${book.number}</span>
+        <span class="book-title">${book.title}</span>
+        <span class="book-tagline">${book.tagline}</span>
+        <span class="book-count">${totalChapters} ch</span>
+        <span class="book-chevron">&#9654;</span>
+      </div>
+      <div class="book-body">
+    `;
+
+    book.parts.forEach((part, pi) => {
+      html += `<div class="part">`;
+      html += `<div class="part-header">
+        <span class="part-label">${part.label}</span>
+        <span class="part-title">${part.title}</span>
+        <span class="part-count">${part.chapters.length} ch</span>
+        <span class="part-chevron">&#9654;</span>
+      </div>`;
+      html += '<div class="part-body">';
+
+      part.chapters.forEach(ch => {
+        const extra = part.isPrologue ? ' is-prologue' : (part.isEpilogue ? ' is-epilogue' : '');
+        const sourceHTML = ch.source
+          ? `<span class="chapter-source" title="${ch.source}">${ch.source}</span>`
+          : `<span class="chapter-source" style="color:rgba(184,151,58,0.4)">new content</span>`;
+
+        const pdfPath = getPdfHref(book.id, part.label, ch.num);
+        const rawPath = pdfPaths[`${book.id}|${part.label}|${ch.num}`] || '';
+        const linkOpen = rawPath ? `<a href="#" onclick="event.preventDefault();openChapter('${rawPath.replace(/'/g, "\\'")}')">` : `<a href="#" onclick="return false" style="cursor:default">`;
+
+        html += `<div class="chapter${extra}">
+          ${linkOpen}
+            <div class="chapter-type-dot ${actionDotClass[ch.action]}"></div>
+            <div class="chapter-num">${ch.num}</div>
+            <div class="chapter-info">
+              <div class="chapter-title">${ch.title}</div>
+              <div class="chapter-meta">
+                <span class="chapter-action-tag tag-${ch.action}">${actionLabels[ch.action]}</span>
+                ${sourceHTML}
+              </div>
+            </div>
+          </a>
+        </div>`;
+      });
+
+      html += '</div></div>';
+    });
+
+    html += '</div>';
+    bookEl.innerHTML = html;
+    container.appendChild(bookEl);
+
+    bookEl.querySelector('.book-header').addEventListener('click', () => bookEl.classList.toggle('open'));
+    bookEl.querySelectorAll('.part').forEach(partEl => {
+      partEl.querySelector('.part-header').addEventListener('click', (e) => {
+        e.stopPropagation();
+        partEl.classList.toggle('open');
+      });
+    });
+  });
+
+  // Open Book I by default
+  document.getElementById('book1').classList.add('open');
+})();
+
+// ===================== CHAPTER CONTENT DATA =====================
+// Loaded from external file to keep the source manageable
+let chapterContent = {};
+(function loadContent() {
+  const script = document.createElement('script');
+  script.src = 'chapters_content.js';
+  script.onload = () => { chapterContent = chaptersContent; console.log('Chapter content loaded:', Object.keys(chapterContent).length, 'chapters'); };
+  script.onerror = () => { console.warn('chapters_content.js not found — reader will show fallback text'); };
+  document.head.appendChild(script);
+})();
+
+// ===================== READER LOGIC =====================
+(function initReader() {
+  const overlay = document.getElementById('readerOverlay');
+  const body = document.getElementById('readerBody');
+  const content = document.getElementById('readerContent');
+  const label = document.getElementById('readerLabel');
+  const progress = document.getElementById('readerProgress');
+  const prevBtn = document.getElementById('readerPrev');
+  const nextBtn = document.getElementById('readerNext');
+  const closeBtn = document.getElementById('readerClose');
+
+  // Build flat ordered list of all chapters with their PDF paths
+  const chapterOrder = [];
+  const chapterMeta = {};
+
+  trilogy.forEach(book => {
+    book.parts.forEach(part => {
+      part.chapters.forEach(ch => {
+        const key = `${book.id}|${part.label}|${ch.num}`;
+        const pdfPath = pdfPaths[key];
+        if (pdfPath) {
+          chapterOrder.push(pdfPath);
+          chapterMeta[pdfPath] = {
+            book: book.title,
+            bookNum: book.number,
+            part: part.title,
+            num: ch.num,
+            title: ch.title
+          };
+        }
+      });
+    });
+  });
+
+  let currentIndex = -1;
+
+  function openChapter(pdfPath) {
+    const idx = chapterOrder.indexOf(pdfPath);
+    if (idx === -1) return;
+    currentIndex = idx;
+
+    const meta = chapterMeta[pdfPath];
+    const htmlContent = chapterContent[pdfPath] || '<p style="color:var(--dim);font-style:italic;">Content loading or not yet available. Make sure chapters_content.js is in the same folder.</p>';
+
+    label.textContent = `${meta.bookNum} · ${meta.title}`;
+    content.innerHTML = htmlContent;
+
+    prevBtn.disabled = (idx === 0);
+    nextBtn.disabled = (idx === chapterOrder.length - 1);
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    body.scrollTop = 0;
+    updateProgress();
+  }
+
+  function closeReader() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    currentIndex = -1;
+    progress.style.width = '0';
+  }
+
+  function updateProgress() {
+    const scrollTop = body.scrollTop;
+    const scrollHeight = body.scrollHeight - body.clientHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight * 100) : 0;
+    progress.style.width = pct + '%';
+  }
+
+  // Event listeners
+  closeBtn.addEventListener('click', closeReader);
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) openChapter(chapterOrder[currentIndex - 1]);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < chapterOrder.length - 1) openChapter(chapterOrder[currentIndex + 1]);
+  });
+
+  body.addEventListener('scroll', updateProgress);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!overlay.classList.contains('active')) return;
+    if (e.key === 'Escape') closeReader();
+    if (e.key === 'ArrowLeft' && currentIndex > 0) openChapter(chapterOrder[currentIndex - 1]);
+    if (e.key === 'ArrowRight' && currentIndex < chapterOrder.length - 1) openChapter(chapterOrder[currentIndex + 1]);
+  });
+
+  // Expose globally so chapter links can call it
+  window.openChapter = openChapter;
+})();
+</script>
+</body>
+</html>
